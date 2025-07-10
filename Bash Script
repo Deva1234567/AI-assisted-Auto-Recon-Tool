@@ -1,0 +1,6 @@
+#!/bin/bash
+mkdir -p tesla
+subfinder -d tesla.com -o tesla/subs.txt
+amass enum -d tesla.com >> tesla/subs.txt
+cat tesla/subs.txt | sort -u | httprobe > tesla/alive.txt
+nmap -iL tesla/alive.txt -oA tesla/nmap_scan
